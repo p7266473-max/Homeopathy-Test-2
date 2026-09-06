@@ -400,4 +400,5 @@ with tab_directory:
                 mime="text/csv"
             )
         with c_act2:
-            st.metric("Total Prescribed Cases", len(df_all_pro[df_all_pro['prescription'] != ""])
+            st.metric("Total Prescribed Cases", len(df_all_pro[df_all_pro['prescription'] != ""]))
+
