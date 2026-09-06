@@ -86,8 +86,16 @@ def init_db():
                     prescription TEXT,
                     followup_notes TEXT
                 )""")
+    # Auto-migration for existing DBs
+    c.execute("PRAGMA table_info(consultations)")
+    existing_cols = [row[1] for row in c.fetchall()]
+    if "miasm" not in existing_cols:
+        c.execute("ALTER TABLE consultations ADD COLUMN miasm TEXT DEFAULT 'Psora'")
+    if "followup_notes" not in existing_cols:
+        c.execute("ALTER TABLE consultations ADD COLUMN followup_notes TEXT DEFAULT ''")
     conn.commit()
     conn.close()
+
 
 init_db()
 
